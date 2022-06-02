@@ -1,0 +1,2 @@
+# Effort calculator
+
