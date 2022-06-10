@@ -13,7 +13,7 @@ defineProps({
       <div class="card">
         <div class="card-body text-center">
         <h5>{{title}}</h5>
-        <p class="text-dark">{{description}}</p>
+        <p class="text-dark my-3">{{description}}</p>
         </div>
       </div>
     </RouterLink>

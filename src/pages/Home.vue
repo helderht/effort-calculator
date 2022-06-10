@@ -8,15 +8,15 @@
       <img src="../assets/logo.svg" alt="logo" height="64">
     </header>
     <div class="text-center my-3">
-      <h1>An estimate for you software projects</h1>
-      <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum dolorum accusantium inventore quis, voluptatum sint eligendi voluptas. Sequi explicabo, perferendis animi neque repellat voluptates aliquam aperiam voluptatibus laboriosam, iure numquam?</p>
+      <h1>An estimation for you software projects</h1>
+      <p class="lead">“When you can measure what you are talking about and express it in numbers, you know something about it; but when you cannot measure, when you cannot express it in numbers, your knowledge it is meager and unsatisfactory” (Kelvin).</p>
     </div>
     <div class="row justify-content-evenly">
-      <Item title="Function P." description="Lorem ipsum dolor sit, amet consectetur adipisicing." target="/functionp"/>
-      <Item title="Use Cases P." description="Lorem ipsum dolor sit, amet consectetur adipisicing." target="/usecasesp"/>
+      <Item title="Function P." description="Its objective is to measure the functionality delivered to the user regardless of the technology used" target="/functionp"/>
+      <Item title="Use Cases P." description="Its main advantage is its fast adaptation when using UML in project development" target="/usecasesp"/>
     </div>
-    <footer class="fixed-bottom py-3 text-center">
-      <small>&copy helder.devjs</small>
+    <footer class="py-3 text-center">
+      <a href="http://github.com/helderht" target="_blank"><i class="fa-brands fa-github fa-xl"></i></a>
     </footer>
     </div>
 </template>
