@@ -16,7 +16,7 @@
       <Item title="Use Cases P." description="Its main advantage is its fast adaptation when using UML in project development" target="/usecasesp"/>
     </div>
     <footer class="py-3 text-center">
-      <a href="http://github.com/helderht" target="_blank"><i class="fa-brands fa-github fa-xl"></i></a>
+      <a href="https://github.com/helderht/effort-calculator" target="_blank"><i class="fa-brands fa-github fa-xl"></i></a>
     </footer>
     </div>
 </template>
