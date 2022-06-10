@@ -1,7 +1,9 @@
 <script setup>
 import {ref, computed, watch} from 'vue'
-import {RouterLink} from 'vue-router';
+import {RouterLink} from 'vue-router'
 import draggable from 'vuedraggable'
+import validateMonth, {validateDay, validateTeam} from '@/services/validations'
+import Alert from '@/components/Alert.vue'
 
 const name=ref('')
 const owner=ref('')
@@ -40,15 +42,6 @@ const addReq=()=>{
 const removeReq=(index)=>{
   if (index > -1) requirements.value.splice(index, 1)
 }
-const calcEffort=computed(()=>{
-  let resReq=0, resFac=0
-  requirements.value.forEach(elm=>resReq=resReq+elm.pts)
-  factors.value.forEach(elm=>resFac=resFac+elm.pts)
-  return effort.value=resReq*(0.65+0.01*resFac)*productivity.value
-})
-const calcTime=computed(()=>{
-  return effort.value/(days.value*hours.value*team.value)
-})
 
 const verifyFactors=watch(factors, ()=>{
   factors.value.some(elm=>elm.pts<0 || elm.pts>5? uiFactors.value=true: uiFactors.value=false)
@@ -57,13 +50,31 @@ const verifyProductivity=watch(productivity, ()=>{
   productivity.value < 1? uiProductivity.value=true: uiProductivity.value=false
 })
 const verifyDays=watch(days, ()=>{
-  days.value<1 || days.value>30? uiDays.value=true: uiDays.value=false
+  validateMonth(days.value)? uiDays.value=true: uiDays.value=false
 })
 const verifyHours=watch(hours, ()=>{
-  hours.value<1 || hours.value>23? uiHours.value=true: uiHours.value=false
+  validateDay(hours.value)? uiHours.value=true: uiHours.value=false
 })
 const verifyTeam=watch(team, ()=>{
-  team.value<1? uiTeam.value=true: uiTeam.value=false
+  validateTeam(team.value)? uiTeam.value=true: uiTeam.value=false
+})
+
+const calcEffort=computed(()=>{
+  if(uiFactors.value || uiProductivity.value || uiDays.value || uiHours.value){
+    return effort.value=0
+  }else{
+    let resReq=0, resFac=0
+    requirements.value.forEach(elm=>resReq=resReq+elm.pts)
+    factors.value.forEach(elm=>resFac=resFac+elm.pts)
+    return effort.value=resReq*(0.65+0.01*resFac)*productivity.value
+  }
+})
+const calcTime=computed(()=>{
+  if(uiTeam.value){
+    return 0
+  }else{
+    return effort.value/(days.value*hours.value*team.value)
+  }
 })
 </script>
 
@@ -163,8 +174,9 @@ const verifyTeam=watch(team, ()=>{
         <div class="card mb-3">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-              <h5 :class="{'text-danger': uiFactors}">Factors</h5>
-              <small class="text-danger" v-if="uiFactors">Only values from 0 to 5</small>
+              <h5>Factors</h5>
+              <Alert msg="Only values from 0 to 5" v-if="uiFactors"/>
+              <!-- <small class="text-danger" v-if="uiFactors">Only values from 0 to 5</small> -->
               <button class="btn text-muted" data-bs-toggle="collapse" data-bs-target="#collapse-af"><i class="fas fa-sort"></i></button>
             </div>
             <div id="collapse-af" class="collapse">
