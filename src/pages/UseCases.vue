@@ -121,12 +121,7 @@ const calcTime=computed(()=>{
         <RouterLink class="me-3" to="/"><img src="../assets/favicon.svg" alt="Logo" width="32"></RouterLink>
         <h5 class="fw-bold">Use Cases Points</h5>
       </div>
-      <div class="btn-toolbar">
-        <div class="btn-group">
-          <button class="btn btn-outline-secondary"><i class="fas fa-share-alt"></i> Share</button>
-          <button class="btn btn-outline-secondary"><i class="fas fa-file-export"></i> Export</button>
-        </div>
-      </div>
+      <button class="btn btn-outline-secondary"><i class="fas fa-file-export"></i> Export</button>
     </header>
     <div class="row flex-md-row-reverse">
       <div class="col-md-8">
