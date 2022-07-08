@@ -3,9 +3,10 @@ import {ref, watch, computed} from 'vue'
 import Alert from '@/components/Alert.vue'
 import validateMonth, {validateDay, validateTeam} from '@/services/validations'
 import ResultItem from '../components/ResultItem.vue';
+import ProjectCard from '../components/ProjectCard.vue'
 
-const name=ref('')
-const owner=ref('')
+/* const name=ref('')
+const owner=ref('') */
 const actors=ref([
   {level: 'Simple', weight: 1, nro: 0},
   {level: 'Medium', weight: 2, nro: 0},
@@ -130,30 +131,7 @@ const calcTime=computed(()=>{
     <div class="row flex-md-row-reverse">
       <div class="col-md-8">
         <!-- project -->
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-              <h5>Project</h5>
-              <button class="btn text-muted" data-bs-toggle="collapse" data-bs-target="#collapse-pro"><i class="fas fa-sort"></i></button>
-            </div>
-            <div id="collapse-pro" class="collapse">
-              <div class="row mt-3">
-                <div class="col-md-6">
-                  <div class="input-group mb-3 mb-md-0">
-                    <span class="input-group-text">Name</span>
-                    <input class="form-control" type="text" v-model="name">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="input-group">
-                    <span class="input-group-text">Owner</span>
-                    <input class="form-control" type="text" v-model="owner">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ProjectCard/>
         <!-- Actors -->
         <div class="row">
           <div class="col-md-6">
