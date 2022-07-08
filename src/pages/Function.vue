@@ -4,6 +4,7 @@ import {RouterLink} from 'vue-router'
 import draggable from 'vuedraggable'
 import validateMonth, {validateDay, validateTeam} from '@/services/validations'
 import Alert from '@/components/Alert.vue'
+import ResultItem from '../components/ResultItem.vue'
 
 const name=ref('')
 const owner=ref('')
@@ -171,7 +172,6 @@ const calcTime=computed(()=>{
             <div class="d-flex justify-content-between align-items-center">
               <h5>Factors</h5>
               <Alert msg="Only values from 0 to 5" v-if="uiFactors"/>
-              <!-- <small class="text-danger" v-if="uiFactors">Only values from 0 to 5</small> -->
               <button class="btn text-muted" data-bs-toggle="collapse" data-bs-target="#collapse-af"><i class="fas fa-sort"></i></button>
             </div>
             <div id="collapse-af" class="collapse">
@@ -188,26 +188,14 @@ const calcTime=computed(()=>{
       </div>
       <div class="col-md-4">
         <div class="sticky-top">
-          <!-- Output -->
+          <!-- Results -->
           <div class="card mb-3">
             <div class="card-body">
-              <h5>Output</h5>
+              <h5>Results</h5>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span>Efforts</span>
-                <div class="text-end">
-                  <span class="d-block" :class="{'text-success': calcEffort>0}">{{ parseFloat(calcEffort).toFixed(2)}}</span>
-                  <small class="text-muted">Hrs./Man</small>
-                </div>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span>Time</span>
-                <div class="text-end">
-                  <span class="d-block" :class="{'text-success': calcTime>0}">{{parseFloat(calcTime).toFixed(2)}}</span>
-                  <small class="text-muted">Months</small>
-                </div>
-              </li>
+              <ResultItem title="Effort" :value="parseFloat(calcEffort).toFixed(2)" unit="Hrs./Man"/>
+              <ResultItem title="Time" :value="parseFloat(calcTime).toFixed(2)" unit="Months"/>
             </ul>
           </div>
           <!-- Settings -->

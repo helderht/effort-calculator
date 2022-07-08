@@ -2,6 +2,7 @@
 import {ref, watch, computed} from 'vue'
 import Alert from '@/components/Alert.vue'
 import validateMonth, {validateDay, validateTeam} from '@/services/validations'
+import ResultItem from '../components/ResultItem.vue';
 
 const name=ref('')
 const owner=ref('')
@@ -77,6 +78,9 @@ const verifyTeam=watch(team, ()=>{
 })
 
 const calcProductivity=computed(()=>{
+  if(uiEnviroment.value){
+    return productivity.value=0
+  }
   let count = 0
   for (let i = 0; i < enviroment.value.length; i++) {
     if (enviroment.value[i].pts <= 3 && i < 6) {
@@ -223,13 +227,16 @@ const calcTime=computed(()=>{
       </div>
       <div class="col-md-4">
         <div class="sticky-top">
-          <!-- Output -->
+          <!-- Results -->
           <div class="card mb-3">
             <div class="card-body">
-              <h5>Output</h5>
+              <h5>Results</h5>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
+              <ResultItem title="Productivity" :value="calcProductivity" unit="Hrs./Use Case"/>
+              <ResultItem title="Effort" :value="parseFloat(calcEffort).toFixed(2)" unit="Hrs./Man"/>
+              <ResultItem title="Time" :value="parseFloat(calcTime).toFixed(2)" unit="Months"/>
+<!--               <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span>Productivity</span>
                 <div class="text-end">
                   <span class="d-block">{{calcProductivity}}</span>
@@ -249,7 +256,7 @@ const calcTime=computed(()=>{
                   <span class="d-block" :class="{'text-success': calcTime>0}">{{parseFloat(calcTime).toFixed(2)}}</span>
                   <small>Months</small>
                 </div>
-              </li>
+              </li> -->
             </ul>
           </div>
           <!-- Settings -->
